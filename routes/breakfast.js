@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Breakfast = require('../models/breakfastModel')
+const Breakfast = require('../models/breakfastModel');
 
 
 
 //Get all 
 router.get('/', async (req, res) => {
 try {
-    const breakfast = await Breakfast.find()
-    res.json(breakfast)
+    const breakfast = await Breakfast.find();
+    res.json(breakfast);
 } catch(err){
     res.status(500).json({message: err.message})
 }
@@ -45,7 +45,7 @@ router.post('/', async (req, res) =>{
 })
 //Update one by id 
 router.put('/:id', async (req, res) =>{
-    try{
+    try {
         const { id } = req.params;
         const breakfast = await Breakfast.findByIdAndUpdate(id, req.body);
     if (!breakfast) {

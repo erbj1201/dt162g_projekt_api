@@ -11,9 +11,6 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to db'))
 
-//Server
-app.listen(3000, () => console.log("server started"))
-
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -45,7 +42,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -67,7 +63,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
+//Server
+app.listen(3000, () => console.log("server started"))
 
 module.exports = app;
 
