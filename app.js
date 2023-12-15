@@ -28,8 +28,6 @@ app.use('/breakfast', breakfastRouter);
 app.use('/coffebread', coffebreadRouter);
 app.use('/drinks', drinksRouter);
 
-
-
 //import joi
 const Joi = require("joi");
 //Importfs to communicate with json-file
@@ -67,7 +65,5 @@ app.use(function(err, req, res, next) {
 app.listen(3000, () => console.log("server started"))
 
 module.exports = app;
-
-//Server-port
 
 
