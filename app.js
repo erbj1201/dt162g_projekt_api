@@ -1,66 +1,77 @@
-//Express
-var createError = require("http-errors");
-var express = require("express");
-var app = express();
+// Express
+const createError = require("http-errors");
+const express = require("express");
+const app = express();
 app.use(express.json());
+const morgan = require("morgan");
+app.use(morgan("dev"));
+const cookieParser = require("cookie-parser"); // Add this line
 
-//Databas - mongodb
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Allow any origin
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+// Database - MongoDB
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/coffecake");
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("connected to db"));
 
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-//Route files
+const path = require("path"); // Add this line
+
+// Import models
+const userModel = require("./models/userModel");
+const menuModel = require("./models/menuModel");
+
+// Import route files
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const breakfastRouter = require("./routes/breakfast");
-const coffebreadRouter = require("./routes/coffebread");
-const drinksRouter = require("./routes/drinks");
+const menuRouter = require("./routes/menu");
 
-//routing
+// Routing
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/breakfast", breakfastRouter);
-app.use("/coffebread", coffebreadRouter);
-app.use("/drinks", drinksRouter);
+app.use("/menu", menuRouter);
 
-//import joi
+// Import Joi
 const Joi = require("joi");
-//Importfs to communicate with json-file
+
+// Import fs to communicate with JSON file
 const fs = require("fs").promises;
 const cors = require("cors");
 app.use(cors());
 
-// view engine setup
+// View engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
+// Catch 404 and forward to error handler
+app.use((req, res, next) => {
   next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
+// Error handler
+app.use((err, req, res, next) => {
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.render("error");
 });
 
-//Server
-app.listen(3000, () => console.log("server started"));
+// Server
+const PORT = process.env.PORT || 3000; // Change 3000 to a different port number
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;

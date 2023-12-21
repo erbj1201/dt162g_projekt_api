@@ -20,4 +20,4 @@ const userSchema = new mongoose.Schema({
   }
 });
 // Exporting the Mongoose model
-module.exports = mongoose.model("Drink", drinkSchema);
+module.exports = mongoose.model("User", userSchema);

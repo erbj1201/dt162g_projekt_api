@@ -1,19 +1,23 @@
 //import mongoose
 const mongoose = require("mongoose");
 // Mongoose schema for model
-const drinkSchema = new mongoose.Schema({
-  drinkName: {
+const menuSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
-  drinkCategory: {
+  description: {
     type: String,
     required: true,
   },
-  drinkPrice: {
+  category: {
+    type: String,
+    required: true,
+  },
+  price: {
     type: String,
     required: true,
   },
 });
 // Exporting the Mongoose model
-module.exports = mongoose.model("Drink", drinkSchema);
+module.exports = mongoose.model("Menu", menuSchema);
