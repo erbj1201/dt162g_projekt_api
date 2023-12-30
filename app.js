@@ -38,15 +38,18 @@ const path = require("path"); // Add this line
 const userModel = require("./models/userModel");
 const menuModel = require("./models/menuModel");
 
+
 // Import route files
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const menuRouter = require("./routes/menu");
+const loginRouter = require("./routes/login");
 
 // Routing
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/menu", menuRouter);
+app.use("/login", loginRouter);
 
 // Import Joi
 const Joi = require("joi");

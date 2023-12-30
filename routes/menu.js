@@ -17,8 +17,12 @@ router.get("/", async (req, res) => {
   try {
     // Find all menu items
     const items = await menu.find();
+    //If no menu items, return with message
+    if (!items) {
+      return res.status(404).json({ message: `Could not find item with id ${id}` });
+    }
     // Respond with JSON containing all menu items
-    res.json(items);
+    res.status(200).json(items);
   } catch (err) {
     // If there is a server error, respond with an error message
     res.status(500).json({ message: err.message });
