@@ -74,8 +74,7 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
-// Update a menu item by id
+// Update a menu item by id using PUT
 router.put("/:id", async (req, res) => {
   try {
     // Get id from request parameters
@@ -87,7 +86,7 @@ router.put("/:id", async (req, res) => {
       return res.status(400).json({ message: error.details[0].message });
     }
 
-    // Find and update the menu item by id
+    // Find and update the menu item by id using PUT
     const updatedItem = await menu.findByIdAndUpdate(id, req.body, { new: true });
     // If the menu item with the given id does not exist, respond with a 404 status and message
     if (!updatedItem) {
@@ -95,7 +94,7 @@ router.put("/:id", async (req, res) => {
     }
 
     // Fetch the updated menu item by id
-    res.status(201).json(updatedItem);
+    res.status(200).json(updatedItem);
   } catch (error) {
     // If there is a server error, respond with an error message
     res.status(500).json({ message: error.message });

@@ -2,6 +2,8 @@
 const createError = require("http-errors");
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 const morgan = require("morgan");
 app.use(morgan("dev"));
@@ -12,6 +14,16 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+// Allow only specific origins
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 // Database - MongoDB
 const mongoose = require("mongoose");
@@ -41,8 +53,7 @@ const Joi = require("joi");
 
 // Import fs to communicate with JSON file
 const fs = require("fs").promises;
-const cors = require("cors");
-app.use(cors());
+
 
 // View engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -67,6 +78,23 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render("error");
 });
+
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
+
+// Set the views directory
+app.set('views', path.join(__dirname, 'views'));
+
+// Your other middleware and routes...
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  // Render the error view with an error message
+  res.status(500).render('error', { error: 'Internal Server Error' });
+});
+
 
 // Server
 const PORT = process.env.PORT || 3000; // Change 3000 to a different port number
