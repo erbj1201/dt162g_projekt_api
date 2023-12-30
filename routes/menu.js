@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const menu = require("../models/menuModel");
 const Joi = require("joi");
+const auth = require("../auth/auth");
 
 // Joi schema to validate data
 const menuJoiSchema = Joi.object({
@@ -19,7 +20,9 @@ router.get("/", async (req, res) => {
     const items = await menu.find();
     //If no menu items, return with message
     if (!items) {
-      return res.status(404).json({ message: `Could not find item with id ${id}` });
+      return res
+        .status(404)
+        .json({ message: `Could not find item with id ${id}` });
     }
     // Respond with JSON containing all menu items
     res.status(200).json(items);
@@ -38,7 +41,9 @@ router.get("/:id", async (req, res) => {
     const item = await menu.findById(id);
     // If the menu item with the given id does not exist, respond with a 404 status and message
     if (!item) {
-      return res.status(404).json({ message: `Could not find item with id ${id}` });
+      return res
+        .status(404)
+        .json({ message: `Could not find item with id ${id}` });
     }
     // Respond with the menu item in JSON format
     res.status(200).json(item);
@@ -48,16 +53,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get menu items by category
-router.get('/category/:category', async (req, res) => {
-    try {
-      const { category } = req.params;
-      const itemsByCategory = await menu.find({ category });
-      res.json(itemsByCategory);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  });
+//Authenticate everything below
+router.use(auth);
 
 // Add a new menu item
 router.post("/", async (req, res) => {
@@ -91,10 +88,14 @@ router.put("/:id", async (req, res) => {
     }
 
     // Find and update the menu item by id using PUT
-    const updatedItem = await menu.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedItem = await menu.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     // If the menu item with the given id does not exist, respond with a 404 status and message
     if (!updatedItem) {
-      return res.status(404).json({ message: `Could not find item with id ${id}` });
+      return res
+        .status(404)
+        .json({ message: `Could not find item with id ${id}` });
     }
 
     // Fetch the updated menu item by id
@@ -114,7 +115,9 @@ router.delete("/:id", async (req, res) => {
     const deletedItem = await menu.findByIdAndDelete(id);
     // If the menu item with the given id does not exist, respond with a 404 status and message
     if (!deletedItem) {
-      return res.status(404).json({ message: `Could not find item with id ${id}` });
+      return res
+        .status(404)
+        .json({ message: `Could not find item with id ${id}` });
     }
     // Respond with a success message
     res.status(200).json({ message: `Item with id ${id} deleted` });
