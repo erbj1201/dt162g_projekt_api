@@ -51,9 +51,15 @@ DELETE           /menu/id                 Raderar en post från menyn med hjälp
 
 {
     "_id": "65900ddf931ba946be6a2744",
+    
     "name": "Kanelbulle",
+    
     "description": "Vetebulle med kanel, socker, kardemumma, pärlsocker",
+    
     "category": "Frukost",
+    
     "price": "25kr",
+    
     "__v": 0
+    
   }
