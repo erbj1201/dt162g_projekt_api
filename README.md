@@ -29,31 +29,45 @@ Kommunikation mellan API:t och applikationerna sker med hjälpa av Ajax-anrop me
 ## Endpoints och användning
 
 
-Metod       Ändpunkt            Beskrivning
+Metod           Ändpunkt                  Beskrivning
 
 
-GET         /menu               Hämtar alla poster i menyn
+GET              /menu                    Hämtar alla poster i menyn
 
 
-GET         /menu/id            Hämtar en specifik post från menyn med hjälp av angivet ID. 
+GET              /menu/id                 Hämtar en specifik post från menyn med hjälp av angivet ID. 
 
 
-POST        /menu               Lagrar ny data i menyn. Kräver att ett menu-objekt skickas med. 
+POST             /menu                    Lagrar ny data i menyn. Kräver att ett menu-objekt skickas med. 
 
 
-PUT         /menu/id            Uppdaterar en existerande post i menyn med angivet ID. Kräver att ett menu-objekt skickas med. 
+PUT              /menu/id                 Uppdaterar en existerande post i menyn med angivet ID. Kräver att ett menu-objekt skickas med. 
 
 
-DELETE      /menu/id             Raderar en post från menyn med hjälp av angivet ID.
+DELETE           /menu/id                 Raderar en post från menyn med hjälp av angivet ID.
 
 
 ### Format på menu-objekt 
 
 {
+
+
     "_id": "65900ddf931ba946be6a2744",
+
+
     "name": "Kanelbulle",
+
+    
     "description": "Vetebulle med kanel, socker, kardemumma, pärlsocker",
+
+    
     "category": "Frukost",
+
+    
     "price": "25kr",
+
+    
     "__v": 0
+
+    
   }
