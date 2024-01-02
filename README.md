@@ -111,13 +111,26 @@ POST             /login                    Loggar in användare. Kräver att ett
   }
 
 
-### Login - Token returneras när inloggning lyckas för en användare
+### Login
+
+{
+
+    "email": "mateo@outlook.com",
+    
+    "password" : "password"
+    
+}
+
+
+
+### Login - Format på Token dom returneras när inloggning lyckas för en användare
 
 
 {
 
   "message": "Välkommen",
   
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTAzNmNkNDRiYzdkZjhiODMzZDNlOSIsImlhdCI6MTcwNDIwMzQzM30._figTzpc4OPHvf6v9u44F_BLjDitIEjoNJZ82IuF1qE"
+  "token":
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTAzNmNkNDRiYzdkZjhiODMzZDNlOSIsImlhdCI6MTcwNDIwMzQzM30._figTzpc4OPHvf6v9u44F_BLjDitIEjoNJZ82IuF1qE"
   
 }
