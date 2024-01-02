@@ -16,7 +16,7 @@ Webbtjänsten har full CRUD-funktionalitet för menyn. Det går att hämta hela 
 
 För användare finns endast funktionalitet för att hämta alla användare, hämta specifik användare md hjälp av id och att lägga till användare.
 
-Collection Menu är skyddad och det krävs autentisering för att lägga till, ändra och radera data i den collection. Autentisering sker med hjälp av en token som skapas varje gång en användare loggar in i administrationsgränssnittet. Token returneras när en användare loggar in och lagras i applikationens localstorage. Den returneras även vid inloggning direkt via webbtjänsten.
+Collection Menu är skyddad och det krävs autentisering för att lägga till, ändra och radera data i den collection. Autentisering sker med hjälp av en token som skapas varje gång en användare loggar in i administrationsgränssnittet. Token returneras när en användare loggar in och lagras i applikationens localstorage. Den returneras även vid inloggning direkt via webbtjänsten. Collection users och login är öppna och skyddas inte av token.
 
 ## Tillhörande webbapplikationer
 Webbtjänsten (API:t) har två webbapplikationer som konusmerar data från webbtjänsten. Båda applikationerna är installerade med Vite och skapade med React som frontend-ramverk. All kod är skriven med TypeScript. Applikationerna är uppbyggda med flera olika komponenter.
