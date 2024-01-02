@@ -10,13 +10,37 @@ Webbutvecklingsprogrammet, Miun Sundsvall
 Kurs: DT162G - JavaScriptbaserad Webbutveckling 
 
 ## Om REST-API:t
-API:t är skapat med NodeJs och Express som ramverk. Data som hanteras i webbtjänsten lagras i en MongoDB-databas. Det finns tre Collections i API:t. Det som lagras är menyn (menu) för ett fiktivt café vid namn CoffeCake Café och användare (users) till caféets administrativa webbplats och login som endast används för POST-anrop vid inloggning av användare.
+API:t är skapat med NodeJs och Express som ramverk (skapat med Express-generator). Data som hanteras i webbtjänsten lagras i en MongoDB-databas. Det finns tre Collections i API:t. Det som lagras är menyn (menu) för ett fiktivt café vid namn CoffeCake Café och användare (users) till caféets administrativa webbplats och login som endast används för POST-anrop vid inloggning av användare.
 
 Webbtjänsten har full CRUD-funktionalitet för menyn. Det går att hämta hela meny, hämta specifika data från menyn med hjälp av id, lägga till en ny data på menyn, ändra en befintlig data i menyn och radera data. 
 
-För användare finns endast funktionalitet för att hämta alla användare, hämta specifik användare md hjälp av id och att lägga till användare.
+För användare finns endast funktionalitet för att hämta alla användare, hämta specifik användare md hjälp av id och att lägga till användare. För login finns endast funtionalitet för att logga in användare.
 
-Collection Menu är skyddad och det krävs autentisering för att lägga till, ändra och radera data i den collection. Autentisering sker med hjälp av en token som skapas varje gång en användare loggar in i administrationsgränssnittet. Token returneras när en användare loggar in och lagras i applikationens localstorage. Den returneras även vid inloggning direkt via webbtjänsten. Collection users och login är öppna och skyddas inte av token.
+
+### Autentisering 
+
+Collection Menu är skyddad och det krävs autentisering för att lägga till, ändra och radera data i den collection. Autentisering sker med hjälp av en token som skapas varje gång en användare loggar in i administrationsgränssnittet. Token returneras när en användare loggar in och lagras i applikationens localstorage. Den returneras även vid inloggning direkt via webbtjänsten. Token behöver skickas med i headers som Authorization. 
+
+Collection users och login är öppna och skyddas inte av token.
+
+POST, PUT & DELTET för Collection Menu är skyddad med autentisering som är skapad med hjälp av NPM-paketen jsonwebtoken, passport och passport-jwt. 
+
+## NPM-paket
+
+Förutom Node.js och Express har följande NPM-paket använts
+- Morgan för att logga HTTP-requests (ingår i Express-generator)
+- Debug för felsökning (ingår i Express-generator)
+- Http-errors för att visa fel (ingår i Express-generator)
+- Cookieparser (ingår i Express-generator)
+- Cors för att tillåta cors
+- Dotenv för att skapa en .env-fil
+- Joi för validering av data
+- Jsonwebtoken för att skapa token
+- Mongoose för att skapa schema till MongoDB
+- Nodemon för automatisk omstart vid ändring i källkodsfilerna
+- Passport för autentisering
+- Passport-jwt för autentisering
+- Bcrypt för att Hasha lösenord
 
 ## Tillhörande webbapplikationer
 Webbtjänsten (API:t) har två webbapplikationer som konusmerar data från webbtjänsten. Båda applikationerna är installerade med Vite och skapade med React som frontend-ramverk. All kod är skriven med TypeScript. Applikationerna är uppbyggda med flera olika komponenter.
