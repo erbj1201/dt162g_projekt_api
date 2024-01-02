@@ -50,6 +50,7 @@ DELETE           /menu/id                 Raderar en post från menyn med hjälp
 ### Format på menu-objekt 
 
 {
+
     "_id": "65900ddf931ba946be6a2744",
     
     "name": "Kanelbulle",
