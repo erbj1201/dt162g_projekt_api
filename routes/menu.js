@@ -72,7 +72,7 @@ router.post("/", async (req, res) => {
     res.status(201).json(newItem);
   } catch (err) {
     // If there is a server error, respond with an error message
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 });
 // Update a menu item by id using PUT
