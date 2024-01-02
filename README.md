@@ -43,7 +43,7 @@ Förutom Node.js och Express har följande NPM-paket använts
 - Bcrypt för att Hasha lösenord
 
 ## Tillhörande webbapplikationer
-Webbtjänsten (API:t) har två webbapplikationer som konusmerar data från webbtjänsten. Båda applikationerna är installerade med Vite och skapade med React som frontend-ramverk. All kod är skriven med TypeScript. Applikationerna är uppbyggda med flera olika komponenter.
+Webbtjänsten (API:t) har två webbapplikationer som konusmerar data från webbtjänsten. Båda applikationerna är installerade med Vite och skapade med React som frontend-ramverk. All kod är skriven med TypeScript. Applikationerna är uppbyggda med flera olika komponenter. CSS-koden är skapad med hjälp av CSS-ramverket Bootstrap och lite egenskriven CSS-kod.
 
 En publik webbplats som är en presentationssida för caféet där de visar sin meny och information. Till den publika webbplatsen sker endast GET-anrop för menu endpointsen till API:t.
 
