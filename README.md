@@ -53,7 +53,7 @@ Kommunikation mellan API:t och applikationerna sker med hjälpa av Ajax-anrop me
 
 
 ## Endpoints och användning
-
+ Denna URL användes av mig lokalt på datorn: http://127.0.0.1:3000/
 
 ### Menu
 
