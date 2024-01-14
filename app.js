@@ -9,8 +9,8 @@ app.use(express.json());
 const morgan = require("morgan");
 app.use(morgan("dev"));
 const cookieParser = require("cookie-parser");
-require("./auth/passport");
 
+//cors
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -38,7 +38,7 @@ const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("connected to db"));
 
-const path = require("path"); // Add this line
+const path = require("path"); 
 
 // Import models
 const userModel = require("./models/userModel");
@@ -92,18 +92,17 @@ app.set("view engine", "ejs");
 // Set the views directory
 app.set("views", path.join(__dirname, "views"));
 
-// Your other middleware and routes...
 
-// Error handling middleware
+// Error handling 
 app.use((err, req, res, next) => {
   console.error(err.stack);
 
-  // Render the error view with an error message
+  // Render error view error message
   res.status(500).render("error", { error: "Internal Server Error" });
 });
 
 // Server
-const PORT = process.env.PORT || 3000; // Change 3000 to a different port number
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

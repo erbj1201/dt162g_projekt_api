@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
 
 // Add a new user
 router.post("/", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // if user exists, send back message
@@ -75,7 +75,6 @@ router.post("/", async (req, res) => {
 
     // Create user with hashed password
     const newUser = await userModel.create({
-      name,
       email,
       password: hashedPassword,
     });
